@@ -2,25 +2,63 @@
 #include <sqlite3.h>
 using namespace std;
 
+static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+   int i;
+   for(i = 0; i<argc; i++) {
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   printf("\n");
+   return 0;
+}
+
 int main(){
-    sqlite3 *db;
+    sqlite3 *BB, *N26, *RV;
     char *zErrMsg = 0;
-    int BB, N26, Rv;
+    int bb, n26, rv;
 
-    BB = sqlite3_open("Boursorama.db", &db);
-    N26 = sqlite3_open("N26.db", &db);
-    Rv = sqlite3_open("Revolut.db", &db);
+    bb = sqlite3_open("Boursorama.db", &BB);
+    n26 = sqlite3_open("N26.db", &N26);
+    rv = sqlite3_open("Revolut.db", &RV);
 
+    char *sql;
 
-
-    if(BB && N26 && Rv)
+    if(!BB || !N26 || !RV)
     {
-        cout<<"Can't open database %s"<<sqlite3_errmsg(db)<<endl;
-        return 0;
+        cout<<"Can't open database %s"<<sqlite3_errmsg(BB)<<sqlite3_errmsg(N26)<<sqlite3_errmsg(RV)<<endl;
+        
+        return 1;
     }
     else
     {
         cout<<"Opened database successfully"<<endl;
     }
-    sqlite3_close(db);
+    
+    /* Create SQL statement */
+   sql = "CREATE TABLE INFO("  \
+    "ID INT PRIMARY KEY     NOT NULL," \
+    "FIRST_NAME           TEXT    NOT NULL," \
+    "LAST_NAME           TEXT    NOT NULL," \
+    "ADDRESS        CHAR(50)    NOT NULL," \
+    "EMAIL        CHAR(50)     NOT NULL," \
+    "PHONE         REAL     NOT NULL,"\
+    "ACCOUNT_NUMBER            INT     NOT NULL," \
+    "PASSWORD        CHAR(50)     NOT NULL);";
+
+    bb = sqlite3_exec(BB, sql, callback, 0, &zErrMsg);
+
+    if(rv && n26 && bb != SQLITE_OK )
+    {
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    } 
+   else 
+   {
+        fprintf(stdout, "Table created successfully\n");
+   }
+
+    sqlite3_close(BB);
+    sqlite3_close(N26);
+    sqlite3_close(RV);
+
+    return 0;
 }
