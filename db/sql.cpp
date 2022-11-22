@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sqlite3.h>
+#include <string.h>
 using namespace std;
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
@@ -20,7 +21,7 @@ int main(){
     n26 = sqlite3_open("N26.db", &N26);
     rv = sqlite3_open("Revolut.db", &RV);
 
-    char *sql;
+    char *sql, *query;
 
     if(!BB || !N26 || !RV)
     {
@@ -35,16 +36,25 @@ int main(){
     
     /* Create SQL statement */
    sql = "CREATE TABLE INFO("  \
-    "ID INT PRIMARY KEY     NOT NULL," \
+    "ID INTEGER PRIMARY KEY     NOT NULL," \
     "FIRST_NAME           TEXT    NOT NULL," \
-    "LAST_NAME           TEXT    NOT NULL," \
-    "ADDRESS        CHAR(50)    NOT NULL," \
-    "EMAIL        CHAR(50)     NOT NULL," \
-    "PHONE         REAL     NOT NULL,"\
-    "ACCOUNT_NUMBER            INT     NOT NULL," \
-    "PASSWORD        CHAR(50)     NOT NULL);";
+    "LAST_NAME           TEXT    NOT NULL)"; //\
+    // "ADDRESS        CHAR(50)    NOT NULL," \
+    // "EMAIL        CHAR(50)     NOT NULL," \
+    // "PHONE         REAL     NOT NULL,"\
+    // "ACCOUNT_NUMBER            INT     NOT NULL," \
+    // "PASSWORD        CHAR(50)     NOT NULL);";
 
-    bb = sqlite3_exec(BB, sql, callback, 0, &zErrMsg);
+    query = "SELECT * FROM INFO";
+  
+    sqlite3_exec(BB, query, callback, 0, &zErrMsg);
+
+    sqlite3_exec(BB, sql, callback, 0, &zErrMsg);
+
+    sql = "INSERT INTO INFO VALUES (NULL, 'Mehdi', 'Chafai');";//, 'Algérie', 'bougnoule@oran.dz', '+213000000000', '12345678910', 'Bougnoule@');";
+
+    sqlite3_exec(BB, sql, callback, 0, &zErrMsg);
+
 
     if(rv && n26 && bb != SQLITE_OK )
     {
@@ -53,7 +63,7 @@ int main(){
     } 
    else 
    {
-        fprintf(stdout, "Table created successfully\n");
+        fprintf(stdout, "Successfully\n");
    }
 
     sqlite3_close(BB);
