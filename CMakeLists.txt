@@ -19,9 +19,11 @@ set(TS_FILES Projet_fr_FR.ts)
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
-        OpenAccountPage.cpp
         mainwindow.h
         mainwindow.ui
+        dialog.h
+        dialog.cpp
+        dialog.ui
         ${TS_FILES}
 )
 

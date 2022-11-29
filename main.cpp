@@ -1,9 +1,5 @@
 #include "mainwindow.h"
 
-#include <QApplication>
-#include <QLocale>
-#include <QTranslator>
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -25,10 +21,12 @@ int main(int argc, char *argv[])
     }
 
     QSqlQuery *qry = new QSqlQuery(BB);
+    //QSqlQuery *in = new QSqlQuery(BB);
     qry->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30))");
     if(!qry->isActive())
         qWarning() << "ERROR: " << qry->lastError().text();
 
+    qry->finish();
     qDebug("Connected!");
 
     QTranslator translator;
@@ -41,6 +39,7 @@ int main(int argc, char *argv[])
         }
     }
     MainWindow w;
+    qry->clear();
     w.show();
     return a.exec();
 }

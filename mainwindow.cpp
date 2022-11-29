@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "dialog.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,10 +21,17 @@ void MainWindow::on_Ok_clicked()
     close();
 }
 
+void MainWindow::on_actionOuvrir_un_Compte_triggered()
+{
+    Dialog d;
+    d.setModal(true);
+    d.exec();
+}
+
 void MainWindow::on_Boursorama_clicked()
 {
     QSqlQuery qry;
-    qry.prepare( "SELECT firstname, lastname FROM info" );
+    qry.prepare( "SELECT * FROM info" );
     if( !qry.exec() )
       qDebug() << qry.lastError();
     else
@@ -41,12 +49,5 @@ void MainWindow::on_Boursorama_clicked()
         for( int c=0; c<cols; c++ )
           qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry.value(c).toString() );
     }
-}
-
-
-void MainWindow::on_actionOuvrir_un_Compte_triggered()
-{
-    QWidget *wdg = new QWidget;
-    wdg->show();
 }
 

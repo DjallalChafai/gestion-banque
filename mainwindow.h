@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QApplication>
+#include <QLocale>
+#include <QTranslator>
 #include <iostream>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
@@ -30,4 +33,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
 };
+
 #endif // MAINWINDOW_H
