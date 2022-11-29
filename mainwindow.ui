@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestion De Banque</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="Ok">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>490</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ok</string>
+    </property>
+   </widget>
+   <widget class="QColumnView" name="columnView">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>120</y>
+      <width>281</width>
+      <height>331</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Boursorama">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>70</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Boursorama</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Revolut">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>240</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Revolut</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="N26">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>400</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>N26</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOp_ration">
+    <property name="title">
+     <string>Opération</string>
+    </property>
+    <addaction name="actionOuvrir_un_Compte"/>
+    <addaction name="actionFermer_un_compte"/>
+    <addaction name="actionSolde_d_un_Compte"/>
+    <addaction name="actionD_pot_sur_un_Compte"/>
+    <addaction name="actionRetrait_d_un_Compte"/>
+    <addaction name="actionHistorique_d_un_Compte"/>
+   </widget>
+   <addaction name="menuOp_ration"/>
+  </widget>
+  <action name="actionOuvrir_un_Compte">
+   <property name="text">
+    <string>Ouvrir un Compte</string>
+   </property>
+  </action>
+  <action name="actionFermer_un_compte">
+   <property name="text">
+    <string>Fermer un Compte</string>
+   </property>
+  </action>
+  <action name="actionSolde_d_un_Compte">
+   <property name="text">
+    <string>Solde d'un Compte</string>
+   </property>
+  </action>
+  <action name="actionD_pot_sur_un_Compte">
+   <property name="text">
+    <string>Dépot sur un Compte</string>
+   </property>
+  </action>
+  <action name="actionRetrait_d_un_Compte">
+   <property name="text">
+    <string>Retrait d'un Compte</string>
+   </property>
+  </action>
+  <action name="actionHistorique_d_un_Compte">
+   <property name="text">
+    <string>Historique d'un Compte</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
