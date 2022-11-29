@@ -23,7 +23,7 @@ void MainWindow::on_Ok_clicked()
 void MainWindow::on_Boursorama_clicked()
 {
     QSqlQuery qry;
-    qry.prepare( "SELECT firstname, lastname, account_number FROM info" );
+    qry.prepare( "SELECT firstname, lastname FROM info" );
     if( !qry.exec() )
       qDebug() << qry.lastError();
     else

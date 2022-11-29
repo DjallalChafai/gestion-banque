@@ -10,7 +10,13 @@ int main(int argc, char *argv[])
     //qDebug() << QSqlDatabase::drivers();
 
 
-    QSqlDatabase BB = QSqlDatabase::addDatabase("QSQLITE", "BB");
+    //QSqlDatabase BB = QSqlDatabase::addDatabase("QSQLITE", "BB");
+
+    QDir databasePath;
+    QString path = databasePath.currentPath()+"BB.db";
+    QSqlDatabase BB = QSqlDatabase::addDatabase("QSQLITE");
+    BB.setDatabaseName(path);
+    BB.open();
 
     if( !BB.open())
     {
