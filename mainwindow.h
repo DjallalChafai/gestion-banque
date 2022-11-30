@@ -30,6 +30,8 @@ private slots:
 
     void on_actionOuvrir_un_Compte_triggered();
 
+    void on_actionFermer_un_compte_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

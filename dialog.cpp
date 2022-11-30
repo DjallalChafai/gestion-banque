@@ -12,3 +12,9 @@ Dialog::~Dialog()
 {
     delete ui;
 }
+
+void Dialog::on_Annuler_clicked()
+{
+    close();
+}
+

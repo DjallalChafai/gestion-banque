@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Fermer_Compte</class>
+ <widget class="QDialog" name="Fermer_Compte">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,37 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="firstName">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>60</y>
-     <width>113</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>firstname</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lastName">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>180</y>
-     <width>113</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>lastname</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="Ok">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>60</y>
+     <x>300</x>
+     <y>70</y>
      <width>75</width>
      <height>24</height>
     </rect>
@@ -55,14 +29,40 @@
   <widget class="QPushButton" name="Annuler">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>180</y>
+     <x>300</x>
+     <y>190</y>
      <width>75</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
     <string>Annuler</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="firstName">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>70</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>firstName</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lastName">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>190</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>lastName</string>
    </property>
   </widget>
  </widget>

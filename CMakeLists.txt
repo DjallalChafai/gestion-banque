@@ -24,6 +24,9 @@ set(PROJECT_SOURCES
         dialog.h
         dialog.cpp
         dialog.ui
+        fermer_compte.h
+        fermer_compte.cpp
+        fermer_compte.ui
         ${TS_FILES}
 )
 

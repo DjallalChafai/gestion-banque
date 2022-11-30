@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "dialog.h"
+#include "fermer_compte.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -49,5 +50,13 @@ void MainWindow::on_Boursorama_clicked()
         for( int c=0; c<cols; c++ )
           qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry.value(c).toString() );
     }
+}
+
+
+void MainWindow::on_actionFermer_un_compte_triggered()
+{
+    Fermer_Compte f;
+    f.setModal(true);
+    f.exec();
 }
 
