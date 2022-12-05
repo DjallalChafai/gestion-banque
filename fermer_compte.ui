@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>484</width>
+    <height>373</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="Ok">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>70</y>
+     <x>340</x>
+     <y>120</y>
      <width>75</width>
      <height>24</height>
     </rect>
@@ -29,8 +29,8 @@
   <widget class="QPushButton" name="Annuler">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>190</y>
+     <x>340</x>
+     <y>240</y>
      <width>75</width>
      <height>24</height>
     </rect>
@@ -39,31 +39,56 @@
     <string>Annuler</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="firstName">
+  <widget class="QLineEdit" name="email">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>70</y>
+     <x>130</x>
+     <y>90</y>
      <width>113</width>
      <height>22</height>
     </rect>
    </property>
    <property name="text">
-    <string>firstName</string>
+    <string>email</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lastName">
+  <widget class="QLineEdit" name="password">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>190</y>
+     <x>130</x>
+     <y>270</y>
      <width>113</width>
      <height>22</height>
     </rect>
    </property>
    <property name="text">
-    <string>lastName</string>
+    <string>password</string>
    </property>
+  </widget>
+  <widget class="QComboBox" name="Banque">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Boursorama</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>N26</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Revolut</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>

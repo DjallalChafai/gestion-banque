@@ -2,6 +2,9 @@
 #define FERMER_COMPTE_H
 
 #include <QDialog>
+#include <QtSql/QtSql>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlError>
 
 namespace Ui {
 class Fermer_Compte;
@@ -17,6 +20,8 @@ public:
 
 private slots:
     void on_Annuler_clicked();
+
+    void on_Ok_clicked();
 
 private:
     Ui::Fermer_Compte *ui;

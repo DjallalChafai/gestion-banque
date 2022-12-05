@@ -31,24 +31,26 @@ void MainWindow::on_actionOuvrir_un_Compte_triggered()
 
 void MainWindow::on_Boursorama_clicked()
 {
-    QSqlQuery qry;
-    qry.prepare( "SELECT * FROM info" );
-    if( !qry.exec() )
-      qDebug() << qry.lastError();
+    QSqlDatabase BB = QSqlDatabase::database("BB");
+
+    QSqlQuery *qry = new QSqlQuery(BB);
+    qry->prepare( "SELECT * FROM info" );
+    if( !qry->exec() )
+      qDebug() << qry->lastError();
     else
     {
       qDebug( "Selected!" );
 
-      QSqlRecord rec = qry.record();
+      QSqlRecord rec = qry->record();
 
       int cols = rec.count();
 
       for( int c=0; c<cols; c++ )
         qDebug() << QString( "Column %1: %2" ).arg( c ).arg( rec.fieldName(c) );
 
-      for( int r=0; qry.next(); r++ )
+      for( int r=0; qry->next(); r++ )
         for( int c=0; c<cols; c++ )
-          qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry.value(c).toString() );
+          qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry->value(c).toString() );
     }
 }
 
@@ -58,5 +60,57 @@ void MainWindow::on_actionFermer_un_compte_triggered()
     Fermer_Compte f;
     f.setModal(true);
     f.exec();
+}
+
+
+void MainWindow::on_Revolut_clicked()
+{
+    QSqlDatabase RV = QSqlDatabase::database("RV");
+
+    QSqlQuery *qry = new QSqlQuery(RV);
+    qry->prepare( "SELECT * FROM info" );
+    if( !qry->exec() )
+      qDebug() << qry->lastError();
+    else
+    {
+      qDebug( "Selected!" );
+
+      QSqlRecord rec = qry->record();
+
+      int cols = rec.count();
+
+      for( int c=0; c<cols; c++ )
+        qDebug() << QString( "Column %1: %2" ).arg( c ).arg( rec.fieldName(c) );
+
+      for( int r=0; qry->next(); r++ )
+        for( int c=0; c<cols; c++ )
+          qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry->value(c).toString() );
+    }
+}
+
+
+void MainWindow::on_N26_clicked()
+{
+    QSqlDatabase N26 = QSqlDatabase::database("N26");
+
+    QSqlQuery *qry = new QSqlQuery(N26);
+    qry->prepare( "SELECT * FROM info" );
+    if( !qry->exec() )
+      qDebug() << qry->lastError();
+    else
+    {
+      qDebug( "Selected!" );
+
+      QSqlRecord rec = qry->record();
+
+      int cols = rec.count();
+
+      for( int c=0; c<cols; c++ )
+        qDebug() << QString( "Column %1: %2" ).arg( c ).arg( rec.fieldName(c) );
+
+      for( int r=0; qry->next(); r++ )
+        for( int c=0; c<cols; c++ )
+          qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry->value(c).toString() );
+    }
 }
 

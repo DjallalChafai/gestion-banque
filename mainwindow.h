@@ -32,6 +32,10 @@ private slots:
 
     void on_actionFermer_un_compte_triggered();
 
+    void on_Revolut_clicked();
+
+    void on_N26_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
