@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     QSqlQuery *qry = new QSqlQuery(BB);
     //QSqlQuery *in = new QSqlQuery(BB);
     qry->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30))");
+    //in->exec("DROP TABLE info");
     if(!qry->isActive())
         qWarning() << "ERROR: " << qry->lastError().text();
 
