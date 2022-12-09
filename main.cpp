@@ -3,7 +3,14 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //qDebug() << QSqlDatabase::drivers();
+
+    QTcpSocket socket;
+
+    socket.connectToHost("localhost", 1234);
+
+    if(!socket.isOpen()){
+     qFatal("Impossible de se connecter au Socket") ;
+    }
 
 //    QDir databasePath;
 //    QString path1 = databasePath.currentPath()+"BB.db";

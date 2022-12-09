@@ -2,6 +2,7 @@
 #define DIALOG_H
 
 #include <QDialog>
+#include <QtDebug>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
