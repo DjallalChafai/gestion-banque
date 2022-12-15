@@ -27,6 +27,7 @@ set(PROJECT_SOURCES
         fermer_compte.h
         fermer_compte.cpp
         fermer_compte.ui
+        achrat.qrc
         ${TS_FILES}
 )
 

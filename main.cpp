@@ -4,13 +4,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QTcpSocket socket;
+    //QTcpSocket socket;
 
-    socket.connectToHost("localhost", 1234);
-
-    if(!socket.isOpen()){
-     qFatal("Impossible de se connecter au Socket") ;
-    }
+    //socket.connectToHost("localhost", 1234);
 
 //    QDir databasePath;
 //    QString path1 = databasePath.currentPath()+"BB.db";
@@ -18,8 +14,16 @@ int main(int argc, char *argv[])
 //    QString path3 = databasePath.currentPath()+"N26.db";
 
     QSqlDatabase RV = QSqlDatabase::addDatabase("QSQLITE", "RV");
+    RV.setHostName("127.0.0.1");
+    RV.setPort(1234);
+
     QSqlDatabase BB = QSqlDatabase::addDatabase("QSQLITE", "BB");
+    BB.setHostName("127.0.0.1");
+    BB.setPort(1234);
+
     QSqlDatabase N26 = QSqlDatabase::addDatabase("QSQLITE", "N26");
+    N26.setHostName("127.0.0.1");
+    N26.setPort(1234);
 
 //    BB.setDatabaseName(path1);
 //    RV.setDatabaseName(path2);
@@ -43,6 +47,15 @@ int main(int argc, char *argv[])
         qDebug("Connected!");
 
     QSqlQuery *qry1 = new QSqlQuery(BB);
+//    if(socket.waitForConnected()){
+//     socket.write("SELECT * FROM BB_info");
+//    }
+
+//    if(socket.waitForReadyRead()){
+//        QByteArray response = socket.readAll();
+//        qDebug() << "Réponse du Serveur: " << response;
+//    }
+
     QSqlQuery *qry2 = new QSqlQuery(RV);
     QSqlQuery *qry3 = new QSqlQuery(N26);
 
