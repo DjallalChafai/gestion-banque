@@ -27,16 +27,6 @@
      <string>Ok</string>
     </property>
    </widget>
-   <widget class="QColumnView" name="columnView">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>120</y>
-      <width>281</width>
-      <height>331</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Boursorama">
     <property name="geometry">
      <rect>
@@ -76,6 +66,16 @@
      <string>N26</string>
     </property>
    </widget>
+   <widget class="QTableView" name="SqlView">
+    <property name="geometry">
+     <rect>
+      <x>345</x>
+      <y>60</y>
+      <width>391</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -84,7 +84,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOp_ration">

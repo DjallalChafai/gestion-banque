@@ -50,9 +50,9 @@ int main(int argc, char *argv[])
     qry2->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
     qry3->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
 
-    //qry1->exec("DROP TABLE info");
-    //qry2->exec("DROP TABLE info");
-    //qry3->exec("DROP TABLE info");
+//    qry1->exec("DROP TABLE info");
+//    qry2->exec("DROP TABLE info");
+//    qry3->exec("DROP TABLE info");
     if(!qry1->isActive() || !qry2->isActive() || !qry3->isActive())
     {
         qWarning() << "ERROR: " << qry1->lastError().text();
