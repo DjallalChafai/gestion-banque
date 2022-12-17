@@ -4,76 +4,70 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    //QTcpSocket socket;
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 3306);
 
-    //socket.connectToHost("localhost", 1234);
+    if(socket.waitForConnected()){
+        qDebug() << "wsh bg";
 
-//    QDir databasePath;
-//    QString path1 = databasePath.currentPath()+"BB.db";
-//    QString path2 = databasePath.currentPath()+"RV.db";
-//    QString path3 = databasePath.currentPath()+"N26.db";
+        QSqlDatabase RV = QSqlDatabase::addDatabase("QMYSQL", "rv");
+        RV.setHostName("127.0.0.1");
+        RV.setUserName("root");
+        RV.setDatabaseName("rv");
 
-    QSqlDatabase RV = QSqlDatabase::addDatabase("QSQLITE", "RV");
-    RV.setHostName("127.0.0.1");
-    RV.setPort(1234);
+        QSqlDatabase BB = QSqlDatabase::addDatabase("QMYSQL", "bb");
+        BB.setHostName("127.0.0.1");
+        BB.setUserName("root");
+        BB.setDatabaseName("bb");
 
-    QSqlDatabase BB = QSqlDatabase::addDatabase("QSQLITE", "BB");
-    BB.setHostName("127.0.0.1");
-    BB.setPort(1234);
+        QSqlDatabase N26 = QSqlDatabase::addDatabase("QMYSQL", "n26");
+        N26.setHostName("127.0.0.1");
+        N26.setUserName("root");
+        N26.setDatabaseName("n26");
 
-    QSqlDatabase N26 = QSqlDatabase::addDatabase("QSQLITE", "N26");
-    N26.setHostName("127.0.0.1");
-    N26.setPort(1234);
+        BB.open();
+        RV.open();
+        N26.open();
 
-//    BB.setDatabaseName(path1);
-//    RV.setDatabaseName(path2);
-//    N26.setDatabaseName(path3);
+        if( BB.open() && RV.open() && N26.open())
+        {
+            QSqlQuery *qry1 = new QSqlQuery(BB);
+            QSqlQuery *qry2 = new QSqlQuery(RV);
+            QSqlQuery *qry3 = new QSqlQuery(N26);
+
+            qry1->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
+            qry2->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
+            qry3->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
+
+            if(!qry1->isActive()|| !qry2->isActive() || !qry3->isActive())
+            {
+                qWarning() << "ERROR: " << qry1->lastError().text();
+                qWarning() << "ERROR: " << qry2->lastError().text();
+                qWarning() << "ERROR: " << qry3->lastError().text();
+            }
+
+            BB.close();
+            RV.close();
+            N26.close();
 
 
-    BB.open();
-    RV.open();
-    N26.open();
+        }
 
-    if( !BB.open() || !RV.open() || !N26.open())
-    {
-        qDebug() << BB.lastError();
-        qDebug() << RV.lastError();
-        qDebug() << N26.lastError();
-        qFatal("Failed to Connect");
+        else
+        {
+            qDebug() << BB.lastError().text();
+            qDebug() << RV.lastError().text();
+            qDebug() << N26.lastError().text();
+            qFatal("Failed to Connect");
+        }
+
+        socket.close();
     }
-
 
     else
-        qDebug("Connected!");
-
-    QSqlQuery *qry1 = new QSqlQuery(BB);
-//    if(socket.waitForConnected()){
-//     socket.write("SELECT * FROM BB_info");
-//    }
-
-//    if(socket.waitForReadyRead()){
-//        QByteArray response = socket.readAll();
-//        qDebug() << "Réponse du Serveur: " << response;
-//    }
-
-    QSqlQuery *qry2 = new QSqlQuery(RV);
-    QSqlQuery *qry3 = new QSqlQuery(N26);
-
-    qry1->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
-    qry2->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
-    qry3->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER)");
-
-//    qry1->exec("DROP TABLE info");
-//    qry2->exec("DROP TABLE info");
-//    qry3->exec("DROP TABLE info");
-    if(!qry1->isActive() || !qry2->isActive() || !qry3->isActive())
     {
-        qWarning() << "ERROR: " << qry1->lastError().text();
-        qWarning() << "ERROR: " << qry2->lastError().text();
-        qWarning() << "ERROR: " << qry3->lastError().text();
+        qDebug() << "Could not connect to the MySQL server";
     }
-
-    qry1->finish();
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

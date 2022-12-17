@@ -38,7 +38,7 @@ void MainWindow::on_actionOuvrir_un_Compte_triggered()
 void MainWindow::on_Boursorama_clicked()
 {
 
-    QSqlDatabase BB = QSqlDatabase::database("BB");
+    QSqlDatabase BB = QSqlDatabase::database("bb");
 
     QSqlQuery *qry = new QSqlQuery(BB);
     qry->prepare( "SELECT * FROM info" );
@@ -90,7 +90,7 @@ void MainWindow::on_actionFermer_un_compte_triggered()
 
 void MainWindow::on_Revolut_clicked()
 {
-    QSqlDatabase RV = QSqlDatabase::database("RV");
+    QSqlDatabase RV = QSqlDatabase::database("rv");
 
     QSqlQuery *qry = new QSqlQuery(RV);
 
@@ -120,7 +120,7 @@ void MainWindow::on_Revolut_clicked()
 
 void MainWindow::on_N26_clicked()
 {
-    QSqlDatabase N26 = QSqlDatabase::database("N26");
+    QSqlDatabase N26 = QSqlDatabase::database("n26");
 
     QSqlQuery *qry = new QSqlQuery(N26);
 

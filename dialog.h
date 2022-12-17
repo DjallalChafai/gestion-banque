@@ -6,6 +6,7 @@
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
+#include <QTcpSocket>
 
 namespace Ui {
 class Dialog;
