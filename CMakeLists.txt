@@ -34,6 +34,12 @@ set(PROJECT_SOURCES
         numero_compte.h
         numero_compte.cpp
         numero_compte.ui
+        retrait.h
+        retrait.cpp
+        retrait.ui
+        depot.h
+        depot.cpp
+        depot.ui
         ${TS_FILES}
 )
 
