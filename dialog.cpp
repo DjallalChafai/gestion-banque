@@ -45,10 +45,12 @@ void Dialog::on_Ok_clicked()
             int r = 0;
             r = rand() % 1000000000 + 10000000000;
 
+            int b = 100;
+
             QSqlDatabase BB = QSqlDatabase::database("bb");
             QSqlQuery *qry = new QSqlQuery(BB);
 
-            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number) VALUES (?, ?, ?, ?, ?, ?, ?)" );
+            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
             qry->addBindValue(firstName);
             qry->addBindValue(lastName);
             qry->addBindValue(address);
@@ -56,6 +58,7 @@ void Dialog::on_Ok_clicked()
             qry->addBindValue(phone);
             qry->addBindValue(password);
             qry->addBindValue(r);
+            qry->addBindValue(b);
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError){
@@ -75,10 +78,12 @@ void Dialog::on_Ok_clicked()
             int r = 0;
             r = rand() % 1000000000 + 10000000000;
 
+            int b = 100;
+
             QSqlDatabase RV = QSqlDatabase::database("rv");
             QSqlQuery *qry = new QSqlQuery(RV);
 
-            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number) VALUES (?, ?, ?, ?, ?, ?, ?)" );
+            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
             qry->addBindValue(firstName);
             qry->addBindValue(lastName);
             qry->addBindValue(address);
@@ -86,6 +91,7 @@ void Dialog::on_Ok_clicked()
             qry->addBindValue(phone);
             qry->addBindValue(password);
             qry->addBindValue(r);
+            qry->addBindValue(b);
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError){
@@ -105,10 +111,12 @@ void Dialog::on_Ok_clicked()
             int r = 0;
             r = rand() % 1000000000 + 10000000000;
 
+            int b = 100;
+
             QSqlDatabase N26 = QSqlDatabase::database("n26");
             QSqlQuery *qry = new QSqlQuery(N26);
 
-            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number) VALUES (?, ?, ?, ?, ?, ?, ?)" );
+            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
             qry->addBindValue(firstName);
             qry->addBindValue(lastName);
             qry->addBindValue(address);
@@ -116,6 +124,7 @@ void Dialog::on_Ok_clicked()
             qry->addBindValue(phone);
             qry->addBindValue(password);
             qry->addBindValue(r);
+            qry->addBindValue(b);
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError){

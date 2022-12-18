@@ -37,6 +37,10 @@ private slots:
 
     void on_N26_clicked();
 
+    void on_actionSolde_d_un_Compte_triggered();
+
+    void on_actionNum_ro_de_compte_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

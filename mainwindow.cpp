@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "dialog.h"
 #include "fermer_compte.h"
+#include "solde_compte.h"
+#include "numero_compte.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,8 +22,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
 
 void MainWindow::on_Ok_clicked()
 {
@@ -56,27 +56,15 @@ void MainWindow::on_Boursorama_clicked()
     model->setHeaderData(5, Qt::Horizontal, tr("phone"));
     model->setHeaderData(6, Qt::Horizontal, tr("password"));
     model->setHeaderData(7, Qt::Horizontal, tr("account_number"));
+    model->setHeaderData(8, Qt::Horizontal, tr("balance"));
 
     ui->SqlView->setModel(model);
 
     if( !qry->exec() )
       qDebug() << qry->lastError();
+
     else
-    {
-
       qDebug( "Selected!" );
-
-//      QSqlRecord rec = qry->record();
-
-//      int cols = rec.count();
-
-//      for( int c=0; c<cols; c++ )
-//        qDebug() << QString( "Column %1: %2" ).arg( c ).arg( rec.fieldName(c) );
-
-//      for( int r=0; qry->next(); r++ )
-//        for( int c=0; c<cols; c++ )
-//          qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry->value(c).toString() );
-    }
 }
 
 
@@ -107,10 +95,11 @@ void MainWindow::on_Revolut_clicked()
     model->setHeaderData(5, Qt::Horizontal, tr("phone"));
     model->setHeaderData(6, Qt::Horizontal, tr("password"));
     model->setHeaderData(7, Qt::Horizontal, tr("account_number"));
+    model->setHeaderData(8, Qt::Horizontal, tr("balance"));
 
     ui->SqlView->setModel(model);
 
-    qry->prepare( "SELECT * FROM info" );
+    //qry->prepare( "SELECT * FROM info" );
     if( !qry->exec() )
       qDebug() << qry->lastError();
     else
@@ -137,26 +126,32 @@ void MainWindow::on_N26_clicked()
     model->setHeaderData(5, Qt::Horizontal, tr("phone"));
     model->setHeaderData(6, Qt::Horizontal, tr("password"));
     model->setHeaderData(7, Qt::Horizontal, tr("account_number"));
+    model->setHeaderData(8, Qt::Horizontal, tr("balance"));
 
     ui->SqlView->setModel(model);
 
     qry->prepare( "SELECT * FROM info" );
     if( !qry->exec() )
       qDebug() << qry->lastError();
+
     else
-    {
       qDebug( "Selected!" );
 
-//      QSqlRecord rec = qry->record();
+}
 
-//      int cols = rec.count();
 
-//      for( int c=0; c<cols; c++ )
-//        qDebug() << QString( "Column %1: %2" ).arg( c ).arg( rec.fieldName(c) );
+void MainWindow::on_actionSolde_d_un_Compte_triggered()
+{
+    Solde_Compte s;
+    s.setModal(true);
+    s.exec();
+}
 
-//      for( int r=0; qry->next(); r++ )
-//        for( int c=0; c<cols; c++ )
-//          qDebug() << QString( "Row %1, %2: %3" ).arg( r ).arg( rec.fieldName(c) ).arg( qry->value(c).toString() );
-    }
+
+void MainWindow::on_actionNum_ro_de_compte_triggered()
+{
+    Numero_Compte num;
+    num.setModal(true);
+    num.exec();
 }
 

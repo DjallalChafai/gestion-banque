@@ -97,6 +97,7 @@
     <addaction name="actionD_pot_sur_un_Compte"/>
     <addaction name="actionRetrait_d_un_Compte"/>
     <addaction name="actionHistorique_d_un_Compte"/>
+    <addaction name="actionNum_ro_de_compte"/>
    </widget>
    <addaction name="menuOp_ration"/>
   </widget>
@@ -128,6 +129,11 @@
   <action name="actionHistorique_d_un_Compte">
    <property name="text">
     <string>Historique d'un Compte</string>
+   </property>
+  </action>
+  <action name="actionNum_ro_de_compte">
+   <property name="text">
+    <string>Numéro de compte</string>
    </property>
   </action>
  </widget>

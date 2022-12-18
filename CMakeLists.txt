@@ -28,6 +28,12 @@ set(PROJECT_SOURCES
         fermer_compte.cpp
         fermer_compte.ui
         achrat.qrc
+        solde_compte.h
+        solde_compte.cpp
+        solde_compte.ui
+        numero_compte.h
+        numero_compte.cpp
+        numero_compte.ui
         ${TS_FILES}
 )
 
