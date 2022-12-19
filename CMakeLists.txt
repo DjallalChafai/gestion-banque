@@ -19,35 +19,49 @@ set(TS_FILES Projet_fr_FR.ts)
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        dialog.h
         dialog.cpp
-        dialog.ui
-        fermer_compte.h
         fermer_compte.cpp
-        fermer_compte.ui
-        achrat.qrc
-        solde_compte.h
         solde_compte.cpp
-        solde_compte.ui
-        numero_compte.h
         numero_compte.cpp
-        numero_compte.ui
-        retrait.h
         retrait.cpp
-        retrait.ui
-        depot.h
         depot.cpp
-        depot.ui
         ${TS_FILES}
+)
+
+set(PROJECT_HEADERS
+        depot.h
+        dialog.h
+        fermer_compte.h
+        mainwindow.h
+        numero_compte.h
+        retrait.h
+        solde_compte.h
+)
+
+set(PROJECT_FORMS
+        depot.ui
+        dialog.ui
+        fermer_compte.ui
+        mainwindow.ui
+        numero_compte.ui
+        retrait.ui
+        solde_compte.ui
+)
+
+set(PROJECT_RESOURCES
+        achrat.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Projet
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${PROJECT_HEADERS}
+        ${PROJECT_FORMS}
+        ${PROJECT_RESOURCES}
     )
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Projet APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

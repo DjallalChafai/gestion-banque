@@ -41,6 +41,8 @@ private slots:
 
     void on_actionNum_ro_de_compte_triggered();
 
+    void on_actionD_pot_sur_un_Compte_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

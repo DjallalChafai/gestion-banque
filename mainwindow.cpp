@@ -3,6 +3,8 @@
 #include "fermer_compte.h"
 #include "solde_compte.h"
 #include "numero_compte.h"
+#include "depot.h"
+#include "retrait.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -81,6 +83,7 @@ void MainWindow::on_Revolut_clicked()
     QSqlDatabase RV = QSqlDatabase::database("rv");
 
     QSqlQuery *qry = new QSqlQuery(RV);
+    qry->prepare( "SELECT * FROM info" );
 
     QSqlTableModel *model = new QSqlTableModel(this, RV);
     model->setTable("info");
@@ -99,7 +102,6 @@ void MainWindow::on_Revolut_clicked()
 
     ui->SqlView->setModel(model);
 
-    //qry->prepare( "SELECT * FROM info" );
     if( !qry->exec() )
       qDebug() << qry->lastError();
     else
@@ -112,6 +114,7 @@ void MainWindow::on_N26_clicked()
     QSqlDatabase N26 = QSqlDatabase::database("n26");
 
     QSqlQuery *qry = new QSqlQuery(N26);
+    qry->prepare( "SELECT * FROM info" );
 
     QSqlTableModel *model = new QSqlTableModel(this, N26);
     model->setTable("info");
@@ -130,7 +133,6 @@ void MainWindow::on_N26_clicked()
 
     ui->SqlView->setModel(model);
 
-    qry->prepare( "SELECT * FROM info" );
     if( !qry->exec() )
       qDebug() << qry->lastError();
 
@@ -153,5 +155,13 @@ void MainWindow::on_actionNum_ro_de_compte_triggered()
     Numero_Compte num;
     num.setModal(true);
     num.exec();
+}
+
+
+void MainWindow::on_actionD_pot_sur_un_Compte_triggered()
+{
+    depot d;
+    d.setModal(true);
+    d.exec();
 }
 
