@@ -1,49 +1,41 @@
-#include "mainwindow.h"
-#include "dialog.h"
-#include "fermer_compte.h"
-#include "solde_compte.h"
-#include "numero_compte.h"
-#include "depot.h"
-#include "retrait.h"
-#include "./ui_mainwindow.h"
+#include "mainwindow.hpp"
+#include "dialog.hpp"
+#include "fermer_compte.hpp"
+#include "solde_compte.hpp"
+#include "numero_compte.hpp"
+#include "depot.hpp"
+#include "retrait.hpp"
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-
-    QPixmap bkgnd(":/Images/background.jpg");
+    QPixmap bkgnd(":/assets/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_Ok_clicked()
-{
+void MainWindow::on_Ok_clicked() {
     close();
 }
 
-void MainWindow::on_actionOuvrir_un_Compte_triggered()
-{
+void MainWindow::on_actionOuvrir_un_Compte_triggered() {
     Dialog d;
     d.setModal(true);
     d.exec();
 }
 
-void MainWindow::on_Boursorama_clicked()
-{
+void MainWindow::on_Boursorama_clicked() {
 
     QSqlDatabase BB = QSqlDatabase::database("bb");
 
     QSqlQuery *qry = new QSqlQuery(BB);
-    qry->prepare( "SELECT * FROM info" );
+    qry->prepare("SELECT * FROM info");
 
     QSqlTableModel *model = new QSqlTableModel(this, BB);
     model->setTable("info");
@@ -62,28 +54,26 @@ void MainWindow::on_Boursorama_clicked()
 
     ui->SqlView->setModel(model);
 
-    if( !qry->exec() )
+    if(!qry->exec())
       qDebug() << qry->lastError();
 
     else
-      qDebug( "Selected!" );
+      qDebug("Selected!");
 }
 
 
-void MainWindow::on_actionFermer_un_compte_triggered()
-{
+void MainWindow::on_actionFermer_un_compte_triggered() {
     Fermer_Compte f;
     f.setModal(true);
     f.exec();
 }
 
 
-void MainWindow::on_Revolut_clicked()
-{
+void MainWindow::on_Revolut_clicked() {
     QSqlDatabase RV = QSqlDatabase::database("rv");
 
     QSqlQuery *qry = new QSqlQuery(RV);
-    qry->prepare( "SELECT * FROM info" );
+    qry->prepare("SELECT * FROM info");
 
     QSqlTableModel *model = new QSqlTableModel(this, RV);
     model->setTable("info");
@@ -105,16 +95,15 @@ void MainWindow::on_Revolut_clicked()
     if( !qry->exec() )
       qDebug() << qry->lastError();
     else
-        qDebug( "Selected!" );
+        qDebug("Selected!");
 }
 
 
-void MainWindow::on_N26_clicked()
-{
+void MainWindow::on_N26_clicked() {
     QSqlDatabase N26 = QSqlDatabase::database("n26");
 
     QSqlQuery *qry = new QSqlQuery(N26);
-    qry->prepare( "SELECT * FROM info" );
+    qry->prepare("SELECT * FROM info");
 
     QSqlTableModel *model = new QSqlTableModel(this, N26);
     model->setTable("info");
@@ -137,31 +126,27 @@ void MainWindow::on_N26_clicked()
       qDebug() << qry->lastError();
 
     else
-      qDebug( "Selected!" );
+      qDebug("Selected!");
 
 }
 
 
-void MainWindow::on_actionSolde_d_un_Compte_triggered()
-{
+void MainWindow::on_actionSolde_d_un_Compte_triggered() {
     Solde_Compte s;
     s.setModal(true);
     s.exec();
 }
 
 
-void MainWindow::on_actionNum_ro_de_compte_triggered()
-{
+void MainWindow::on_actionNum_ro_de_compte_triggered() {
     Numero_Compte num;
     num.setModal(true);
     num.exec();
 }
 
 
-void MainWindow::on_actionD_pot_sur_un_Compte_triggered()
-{
+void MainWindow::on_actionD_pot_sur_un_Compte_triggered() {
     depot d;
     d.setModal(true);
     d.exec();
 }
-

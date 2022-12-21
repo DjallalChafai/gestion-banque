@@ -1,36 +1,29 @@
-#include "dialog.h"
+#include "dialog.hpp"
 #include "ui_dialog.h"
 
-Dialog::Dialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Dialog)
-{
+Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
     ui->setupUi(this);
-
-    QPixmap bkgnd(":/Images/background.jpg");
+    QPixmap bkgnd(":/assets/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
-Dialog::~Dialog()
-{
+Dialog::~Dialog() {
     delete ui;
 }
 
-void Dialog::on_Annuler_clicked()
-{
+void Dialog::on_Annuler_clicked() {
     close();
 }
 
 
-void Dialog::on_Ok_clicked()
-{
+void Dialog::on_Ok_clicked() {
     QTcpSocket socket;
     socket.connectToHost("127.0.0.1", 3306);
 
-    if(socket.waitForConnected()){
+    if(socket.waitForConnected()) {
         QString firstName = ui->firstName->text();
         QString lastName = ui->lastName->text();
         QString address = ui->address->text();
@@ -41,7 +34,7 @@ void Dialog::on_Ok_clicked()
 
         qDebug() << firstName << lastName;
 
-        if(ui->Banque->currentText() == "Boursorama"){
+        if(ui->Banque->currentText() == "Boursorama") {
             int r = 0;
             r = rand() % 1000000000 + 10000000000;
 
@@ -50,7 +43,7 @@ void Dialog::on_Ok_clicked()
             QSqlDatabase BB = QSqlDatabase::database("bb");
             QSqlQuery *qry = new QSqlQuery(BB);
 
-            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
+            qry->prepare("INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             qry->addBindValue(firstName);
             qry->addBindValue(lastName);
             qry->addBindValue(address);
@@ -61,20 +54,16 @@ void Dialog::on_Ok_clicked()
             qry->addBindValue(b);
             qry->exec();
 
-            if(qry->lastError().type() == QSqlError::NoError){
+            if(qry->lastError().type() == QSqlError::NoError) {
                 qDebug() << "Data was successfully inserted into the DB";
             }
 
-            if(!qry->isActive())
-            {
+            if(!qry->isActive()) {
                 qWarning() << "ERROR: " << qry->lastError().text();
             }
-
-
-            qDebug() << "Wsh mon Bou";
         }
 
-        if(ui->Banque->currentText() == "Revolut"){
+        if(ui->Banque->currentText() == "Revolut") {
             int r = 0;
             r = rand() % 1000000000 + 10000000000;
 
@@ -83,7 +72,7 @@ void Dialog::on_Ok_clicked()
             QSqlDatabase RV = QSqlDatabase::database("rv");
             QSqlQuery *qry = new QSqlQuery(RV);
 
-            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
+            qry->prepare("INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             qry->addBindValue(firstName);
             qry->addBindValue(lastName);
             qry->addBindValue(address);
@@ -102,9 +91,6 @@ void Dialog::on_Ok_clicked()
             {
                 qWarning() << "ERROR: " << qry->lastError().text();
             }
-
-
-            qDebug() << "Wsh mon reuv";
         }
 
         if(ui->Banque->currentText() == "N26"){
@@ -116,7 +102,7 @@ void Dialog::on_Ok_clicked()
             QSqlDatabase N26 = QSqlDatabase::database("n26");
             QSqlQuery *qry = new QSqlQuery(N26);
 
-            qry->prepare( "INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" );
+            qry->prepare("INSERT INTO info (firstname, lastname, address, email, phone, password, account_number, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             qry->addBindValue(firstName);
             qry->addBindValue(lastName);
             qry->addBindValue(address);
@@ -127,7 +113,7 @@ void Dialog::on_Ok_clicked()
             qry->addBindValue(b);
             qry->exec();
 
-            if(qry->lastError().type() == QSqlError::NoError){
+            if(qry->lastError().type() == QSqlError::NoError) {
                 qDebug() << "Data was successfully inserted into the DB";
             }
 
@@ -135,19 +121,12 @@ void Dialog::on_Ok_clicked()
             {
                 qWarning() << "ERROR: " << qry->lastError().text();
             }
-
-
-            qDebug() << "Wsh mon Nigger";
         }
 
         socket.close();
-    }
-
-    else
-    {
+    } else {
         qDebug() << "Could not connect to the MySQL server";
     }
 
     close();
 }
-

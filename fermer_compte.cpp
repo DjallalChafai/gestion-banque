@@ -1,32 +1,24 @@
-#include "fermer_compte.h"
+#include "fermer_compte.hpp"
 #include "ui_fermer_compte.h"
 
-Fermer_Compte::Fermer_Compte(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Fermer_Compte)
-{
+Fermer_Compte::Fermer_Compte(QWidget *parent) : QDialog(parent), ui(new Ui::Fermer_Compte) {
     ui->setupUi(this);
-
-    QPixmap bkgnd(":/Images/background.jpg");
+    QPixmap bkgnd(":/assets/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
-Fermer_Compte::~Fermer_Compte()
-{
+Fermer_Compte::~Fermer_Compte() {
     delete ui;
 }
 
-void Fermer_Compte::on_Annuler_clicked()
-{
+void Fermer_Compte::on_Annuler_clicked() {
     close();
 }
 
-
-void Fermer_Compte::on_Ok_clicked()
-{
+void Fermer_Compte::on_Ok_clicked() {
     QString email = ui->email->text();
     QString password = ui->password->text();
 
@@ -36,7 +28,7 @@ void Fermer_Compte::on_Ok_clicked()
     qDebug() << email << password;
 
     if(socket.waitForConnected()){
-        if(ui->Banque->currentText() == "Boursorama"){
+        if(ui->Banque->currentText() == "Boursorama") {
             QSqlDatabase BB = QSqlDatabase::database("bb");
             QSqlQuery *qry = new QSqlQuery(BB);
 
@@ -48,11 +40,9 @@ void Fermer_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully deleted into the DB";
             }
-
-            qDebug() << "Salut mon Bou";
         }
 
-        if(ui->Banque->currentText() == "Revolut"){
+        if(ui->Banque->currentText() == "Revolut") {
             QSqlDatabase RV = QSqlDatabase::database("rv");
             QSqlQuery *qry = new QSqlQuery(RV);
 
@@ -61,14 +51,12 @@ void Fermer_Compte::on_Ok_clicked()
             qry->addBindValue(password);
             qry->exec();
 
-            if(qry->lastError().type() == QSqlError::NoError){
+            if(qry->lastError().type() == QSqlError::NoError) {
                 qDebug() << "Data was successfully deleted into the DB";
             }
-
-            qDebug() << "Salut mon reuv";
         }
 
-        if(ui->Banque->currentText() == "N26"){
+        if(ui->Banque->currentText() == "N26") {
             QSqlDatabase N26 = QSqlDatabase::database("n26");
             QSqlQuery *qry = new QSqlQuery(N26);
 
@@ -77,21 +65,17 @@ void Fermer_Compte::on_Ok_clicked()
             qry->addBindValue(password);
             qry->exec();
 
-            if(qry->lastError().type() == QSqlError::NoError){
+            if(qry->lastError().type() == QSqlError::NoError) {
                 qDebug() << "Data was successfully deleted into the DB";
             }
-
-            qDebug() << "Salut mon Nigger";
         }
 
         socket.close();
     }
 
-    else
-    {
+    else {
         qDebug() << "Could not connect to the MySQL server";
     }
 
     close();
 }
-

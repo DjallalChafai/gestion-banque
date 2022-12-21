@@ -1,32 +1,25 @@
-#include "numero_compte.h"
+#include "numero_compte.hpp"
 #include "ui_numero_compte.h"
 
-Numero_Compte::Numero_Compte(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Numero_Compte)
-{
+Numero_Compte::Numero_Compte(QWidget *parent) : QDialog(parent), ui(new Ui::Numero_Compte) {
     ui->setupUi(this);
-
-    QPixmap bkgnd(":/Images/background.jpg");
+    QPixmap bkgnd(":/assets/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
-Numero_Compte::~Numero_Compte()
-{
+Numero_Compte::~Numero_Compte() {
     delete ui;
 }
 
-void Numero_Compte::on_Annuler_clicked()
-{
+void Numero_Compte::on_Annuler_clicked() {
     close();
 }
 
 
-void Numero_Compte::on_Ok_clicked()
-{
+void Numero_Compte::on_Ok_clicked() {
     QString email = ui->email->text();
     QString password = ui->password->text();
 
@@ -34,7 +27,7 @@ void Numero_Compte::on_Ok_clicked()
     socket.connectToHost("127.0.0.1", 3306);
 
     if(socket.waitForConnected()){
-        if(ui->Banque->currentText() == "Boursorama"){
+        if(ui->Banque->currentText() == "Boursorama") {
             QSqlDatabase BB = QSqlDatabase::database("bb");
             QSqlQuery *qry = new QSqlQuery(BB);
 
@@ -43,7 +36,7 @@ void Numero_Compte::on_Ok_clicked()
             model->setEditStrategy(QSqlTableModel::OnManualSubmit);
             model->select();
 
-            qry->prepare( "SELECT account_number FROM info WHERE email = ? AND password = ?" );
+            qry->prepare("SELECT account_number FROM info WHERE email = ? AND password = ?");
             qry->addBindValue(email);
             qry->addBindValue(password);
             qry->exec();
@@ -62,11 +55,9 @@ void Numero_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully found into the DB";
             }
-
-            qDebug() << "Salut mon Bou";
         }
 
-        if(ui->Banque->currentText() == "Revolut"){
+        if(ui->Banque->currentText() == "Revolut") {
             QSqlDatabase RV = QSqlDatabase::database("rv");
             QSqlQuery *qry = new QSqlQuery(RV);
 
@@ -75,7 +66,7 @@ void Numero_Compte::on_Ok_clicked()
             model->setEditStrategy(QSqlTableModel::OnManualSubmit);
             model->select();
 
-            qry->prepare( "SELECT account_number FROM info WHERE email = ? AND password = ?" );
+            qry->prepare("SELECT account_number FROM info WHERE email = ? AND password = ?");
             qry->addBindValue(email);
             qry->addBindValue(password);
             qry->exec();
@@ -92,11 +83,9 @@ void Numero_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully found into the DB";
             }
-
-            qDebug() << "Salut mon reuv";
         }
 
-        if(ui->Banque->currentText() == "N26"){
+        if(ui->Banque->currentText() == "N26") {
             QSqlDatabase N26 = QSqlDatabase::database("n26");
             QSqlQuery *qry = new QSqlQuery(N26);
 
@@ -105,7 +94,7 @@ void Numero_Compte::on_Ok_clicked()
             model->setEditStrategy(QSqlTableModel::OnManualSubmit);
             model->select();
 
-            qry->prepare( "SELECT account_number FROM info WHERE email = ? AND password = ?" );
+            qry->prepare("SELECT account_number FROM info WHERE email = ? AND password = ?");
             qry->addBindValue(email);
             qry->addBindValue(password);
             qry->exec();
@@ -122,8 +111,6 @@ void Numero_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully found into the DB";
             }
-
-            qDebug() << "Salut mon Nigger";
         }
 
         socket.close();
@@ -134,4 +121,3 @@ void Numero_Compte::on_Ok_clicked()
         qDebug() << "Could not connect to the MySQL server";
     }
 }
-

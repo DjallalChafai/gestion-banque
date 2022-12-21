@@ -1,14 +1,10 @@
-#include "retrait.h"
+#include "retrait.hpp"
 #include "ui_retrait.h"
 
-retrait::retrait(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::retrait)
-{
+retrait::retrait(QWidget *parent) : QDialog(parent), ui(new Ui::retrait) {
     ui->setupUi(this);
 }
 
-retrait::~retrait()
-{
+retrait::~retrait() {
     delete ui;
 }

@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="14"/>
-        <source>Gestion De Banque</source>
+        <source>Gestion de banque</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

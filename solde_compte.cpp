@@ -1,32 +1,25 @@
-#include "solde_compte.h"
+#include "solde_compte.hpp"
 #include "ui_solde_compte.h"
 
-Solde_Compte::Solde_Compte(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Solde_Compte)
-{
+Solde_Compte::Solde_Compte(QWidget *parent) : QDialog(parent), ui(new Ui::Solde_Compte) {
     ui->setupUi(this);
-
-    QPixmap bkgnd(":/Images/background.jpg");
+    QPixmap bkgnd(":/assets/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
-Solde_Compte::~Solde_Compte()
-{
+Solde_Compte::~Solde_Compte() {
     delete ui;
 }
 
-void Solde_Compte::on_Annuler_clicked()
-{
+void Solde_Compte::on_Annuler_clicked() {
     close();
 }
 
 
-void Solde_Compte::on_Ok_clicked()
-{
+void Solde_Compte::on_Ok_clicked() {
     QString account_number = ui->account_number->text();
     QString password = ui->passwd->text();
 
@@ -34,7 +27,7 @@ void Solde_Compte::on_Ok_clicked()
     socket.connectToHost("127.0.0.1", 3306);
 
     if(socket.waitForConnected()){
-        if(ui->menu_deroulant->currentText() == "Boursorama"){
+        if(ui->menu_deroulant->currentText() == "Boursorama") {
             QSqlDatabase BB = QSqlDatabase::database("bb");
             QSqlQuery *qry = new QSqlQuery(BB);
 
@@ -43,7 +36,7 @@ void Solde_Compte::on_Ok_clicked()
             model->setEditStrategy(QSqlTableModel::OnManualSubmit);
             model->select();
 
-            qry->prepare( "SELECT balance FROM info WHERE account_number = ? AND password = ?" );
+            qry->prepare("SELECT balance FROM info WHERE account_number = ? AND password = ?");
             qry->addBindValue(account_number);
             qry->addBindValue(password);
             qry->exec();
@@ -62,8 +55,6 @@ void Solde_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully deleted into the DB";
             }
-
-            qDebug() << "Salut mon Bou";
         }
 
         if(ui->menu_deroulant->currentText() == "Revolut"){
@@ -75,7 +66,7 @@ void Solde_Compte::on_Ok_clicked()
             model->setEditStrategy(QSqlTableModel::OnManualSubmit);
             model->select();
 
-            qry->prepare( "SELECT balance FROM info WHERE account_number = ? AND password = ?" );
+            qry->prepare("SELECT balance FROM info WHERE account_number = ? AND password = ?");
             qry->addBindValue(account_number);
             qry->addBindValue(password);
             qry->exec();
@@ -94,11 +85,9 @@ void Solde_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully deleted into the DB";
             }
-
-            qDebug() << "Salut mon reuv";
         }
 
-        if(ui->menu_deroulant->currentText() == "N26"){
+        if(ui->menu_deroulant->currentText() == "N26") {
             QSqlDatabase N26 = QSqlDatabase::database("n26");
             QSqlQuery *qry = new QSqlQuery(N26);
 
@@ -107,7 +96,7 @@ void Solde_Compte::on_Ok_clicked()
             model->setEditStrategy(QSqlTableModel::OnManualSubmit);
             model->select();
 
-            qry->prepare( "SELECT balance FROM info WHERE account_number = ? AND password = ?" );
+            qry->prepare("SELECT balance FROM info WHERE account_number = ? AND password = ?");
             qry->addBindValue(account_number);
             qry->addBindValue(password);
             qry->exec();
@@ -126,8 +115,6 @@ void Solde_Compte::on_Ok_clicked()
             if(qry->lastError().type() == QSqlError::NoError){
                 qDebug() << "Data was successfully deleted into the DB";
             }
-
-            qDebug() << "Salut mon Nigger";
         }
 
         socket.close();
@@ -139,4 +126,3 @@ void Solde_Compte::on_Ok_clicked()
     }
 
 }
-

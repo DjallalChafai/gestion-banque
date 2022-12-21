@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.5)
-project(Projet VERSION 0.1 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.19)
+project(gestion-banque VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -14,8 +14,13 @@ find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets LinguistTools WebSockets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools WebSockets)
 find_package(Qt6Sql REQUIRED)
 
-set(TS_FILES Projet_fr_FR.ts)
+# assets filess
+set(PROJECT_RESOURCES assets.qrc)
 
+# translations/locales files
+set(GLOB TS_FILES "*.ts")
+
+# C++ source code files
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -28,32 +33,14 @@ set(PROJECT_SOURCES
         ${TS_FILES}
 )
 
-set(PROJECT_HEADERS
-        depot.h
-        dialog.h
-        fermer_compte.h
-        mainwindow.h
-        numero_compte.h
-        retrait.h
-        solde_compte.h
-)
+# header files
+set(GLOB PROJECT_HEADERS "*.hpp")
 
-set(PROJECT_FORMS
-        depot.ui
-        dialog.ui
-        fermer_compte.ui
-        mainwindow.ui
-        numero_compte.ui
-        retrait.ui
-        solde_compte.ui
-)
-
-set(PROJECT_RESOURCES
-        achrat.qrc
-)
+# Qt UI files
+set(GLOB PROJECT_FORMS "ui/*.ui")
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Projet
+    qt_add_executable(gestion-banque
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${PROJECT_HEADERS}
@@ -70,13 +57,13 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 else()
     if(ANDROID)
-        add_library(Projet SHARED
+        add_library(gestion-banque SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(Projet
+        add_executable(gestion-banque
             ${PROJECT_SOURCES}
         )
     endif()
@@ -84,10 +71,10 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(Projet PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Qt6::WebSockets)
+target_link_libraries(gestion-banque PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Qt6::WebSockets)
 #target_link_libraries(mytarget PUBLIC Qt6::Core5Compat)
 
-set_target_properties(Projet PROPERTIES
+set_target_properties(gestion-banque PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -95,10 +82,10 @@ set_target_properties(Projet PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-install(TARGETS Projet
+install(TARGETS gestion-banque
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(Projet)
+    qt_finalize_executable(gestion-banque)
 endif()

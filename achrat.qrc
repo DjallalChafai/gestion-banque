@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>Images/achrat.png</file>
-        <file>Images/background.jpg</file>
-    </qresource>
-</RCC>
