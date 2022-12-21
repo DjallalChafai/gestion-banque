@@ -1,5 +1,30 @@
 #include "mainwindow.hpp"
 
+using namespace std;
+
+int connect(QString database) {
+    // connexion à la base de données
+    QSqlDatabase DB = QSqlDatabase::addDatabase("QMYSQL", database);
+    DB.setHostName("127.0.0.1");
+    DB.setUserName("root");
+    DB.setDatabaseName(database);
+    if (DB.open()) {
+        // création de la table info si elle n'existe pas
+        QSqlQuery *qry = new QSqlQuery(DB);
+        if (qry->isActive()) {
+            qry->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER)");
+        } else {
+            // si erreur de création de la table
+            qWarning() << "ERROR: " << qry->lastError().text();
+        }
+        DB.close();
+    } else {
+        // si erreur de connexion
+        qDebug() << DB.lastError().text();
+        qFatal("Failed to connect!");
+    }
+}
+
 int main(int argc, char *argv[]) {
     // application Qt
     QApplication a(argc, argv);
@@ -11,67 +36,22 @@ int main(int argc, char *argv[]) {
     // attente de connexion
     if (socket.waitForConnected()) {
 
-        // base de données Boursorama
-        QSqlDatabase BB = QSqlDatabase::addDatabase("QMYSQL", "bb");
-        BB.setHostName("127.0.0.1");
-        BB.setUserName("root");
-        BB.setDatabaseName("bb");
-        BB.open();
-        if (BB.open()) {
-            QSqlQuery *qry1 = new QSqlQuery(BB);
-            if (qry1->isActive()) {
-                qry1->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER)");
-            } else {
-                qWarning() << "ERROR: " << qry1->lastError().text();
-            }
-            BB.close();
-        } else {
-            qDebug() << BB.lastError().text();
-            qFatal("Failed to connect!");
-        }
+        // connexion et initialisation des bases de données
+        thread boursorama(connect, "bb");
+        thread revolut(connect, "rv");
+        thread n26(connect, "n26");
 
-        // base de données Revolut
-        QSqlDatabase RV = QSqlDatabase::addDatabase("QMYSQL", "rv");
-        RV.setHostName("127.0.0.1");
-        RV.setUserName("root");
-        RV.setDatabaseName("rv");
-        RV.open();
-        if (RV.open()) {
-            QSqlQuery *qry2 = new QSqlQuery(RV);
-            if (qry2->isActive()) {
-                qry2->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER)");
-            } else {
-                qWarning() << "ERROR: " << qry2->lastError().text();
-            }
-            RV.close();
-        } else {
-            qDebug() << RV.lastError().text();
-            qFatal("Failed to connect!");
-        }
+        // attente de la fin des threads (synchronisation)
+        boursorama.join();
+        revolut.join();
+        n26.join();
 
-        // base de données N26
-        QSqlDatabase N26 = QSqlDatabase::addDatabase("QMYSQL", "n26");
-        N26.setHostName("127.0.0.1");
-        N26.setUserName("root");
-        N26.setDatabaseName("n26");
-        N26.open();
-        if (N26.open()) {
-            QSqlQuery *qry3 = new QSqlQuery(N26);
-            if (qry3->isActive()) {
-                qry3->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER)");
-            } else {
-                qWarning() << "ERROR: " << qry3->lastError().text();
-            }
-            BB.close();
-        } else {
-            qDebug() << N26.lastError().text();
-            qFatal("Failed to connect!");
-        }
+        // fermeture de la connexion socket
         socket.close();
 
     // si absence de connexion à la base de données
     } else {
-        qFatal("Could not connect to MySQL server!");
+        qDebug() << "Could not connect to the MySQL server";
     }
 
     // traductions et textes pour l'interface graphique
@@ -85,8 +65,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // affichage de l'interface graphique
     MainWindow w;
     w.show();
 
+    // boucle d'évènements
     return a.exec();
 }
