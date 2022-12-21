@@ -8,23 +8,30 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    // initialisation de l'interface graphique
     ui->setupUi(this);
+    // chargement de l'image de fond
     QPixmap bkgnd(":/assets/background.jpg");
+    // redimensionnement de l'image de fond
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    // application de l'image de fond
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
 MainWindow::~MainWindow() {
+    // destruction de l'interface graphique
     delete ui;
 }
 
 void MainWindow::on_Ok_clicked() {
+    // récupération des données entrées par l'utilisateur
     close();
 }
 
 void MainWindow::on_actionOuvrir_un_Compte_triggered() {
+    // ouverture et affichage de la fenêtre
     Dialog d;
     d.setModal(true);
     d.exec();
@@ -63,6 +70,7 @@ void MainWindow::on_Boursorama_clicked() {
 
 
 void MainWindow::on_actionFermer_un_compte_triggered() {
+    // ouverture et affichage de la fenêtre
     Fermer_Compte f;
     f.setModal(true);
     f.exec();
@@ -132,6 +140,7 @@ void MainWindow::on_N26_clicked() {
 
 
 void MainWindow::on_actionSolde_d_un_Compte_triggered() {
+    // ouverture et affichage de la fenêtre
     Solde_Compte s;
     s.setModal(true);
     s.exec();
@@ -139,6 +148,7 @@ void MainWindow::on_actionSolde_d_un_Compte_triggered() {
 
 
 void MainWindow::on_actionNum_ro_de_compte_triggered() {
+    // ouverture et affichage de la fenêtre
     Numero_Compte num;
     num.setModal(true);
     num.exec();
@@ -146,6 +156,7 @@ void MainWindow::on_actionNum_ro_de_compte_triggered() {
 
 
 void MainWindow::on_actionD_pot_sur_un_Compte_triggered() {
+    // ouverture et affichage de la fenêtre
     depot d;
     d.setModal(true);
     d.exec();

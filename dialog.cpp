@@ -2,39 +2,44 @@
 #include "ui_dialog.h"
 
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
+    // initialisation de l'interface graphique
     ui->setupUi(this);
+    // chargement de l'image de fond
     QPixmap bkgnd(":/assets/background.jpg");
+    // redimensionnement de l'image de fond
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    // application de l'image de fond
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 }
 
 Dialog::~Dialog() {
+    // destruction de l'interface graphique
     delete ui;
 }
 
 void Dialog::on_Annuler_clicked() {
+    // fermeture de la fenêtre
     close();
 }
 
 
 void Dialog::on_Ok_clicked() {
+    // récupération des données entrées par l'utilisateur
     QTcpSocket socket;
     socket.connectToHost("127.0.0.1", 3306);
 
-    if(socket.waitForConnected()) {
+    // attente de connexion
+    if (socket.waitForConnected()) {
         QString firstName = ui->firstName->text();
         QString lastName = ui->lastName->text();
         QString address = ui->address->text();
         QString email = ui->email->text();
         QString phone = ui->phone->text();
         QString password = ui->password->text();
-
-
-        qDebug() << firstName << lastName;
-
-        if(ui->Banque->currentText() == "Boursorama") {
+        
+        if (ui->Banque->currentText() == "Boursorama") {
             int r = 0;
             r = rand() % 1000000000 + 10000000000;
 
@@ -123,10 +128,13 @@ void Dialog::on_Ok_clicked() {
             }
         }
 
+        // fermeture de la fenêtre
         socket.close();
     } else {
+        // affichage d'un message d'erreur
         qDebug() << "Could not connect to the MySQL server";
     }
 
+    // fermeture de la fenêtre
     close();
 }
