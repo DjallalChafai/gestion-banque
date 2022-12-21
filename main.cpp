@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int connect(QString database) {
+void connect(QString database) {
     // connexion à la base de données
     QSqlDatabase DB = QSqlDatabase::addDatabase("QMYSQL", database);
     DB.setHostName("127.0.0.1");

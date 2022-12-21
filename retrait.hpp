@@ -4,19 +4,18 @@
 #include <QDialog>
 
 namespace Ui {
-class retrait;
+    class retrait;
 }
 
-class retrait : public QDialog
-{
+class retrait : public QDialog {
     Q_OBJECT
 
-public:
-    explicit retrait(QWidget *parent = nullptr);
-    ~retrait();
+    public:
+        explicit retrait(QWidget *parent = nullptr);
+        ~retrait();
 
-private:
-    Ui::retrait *ui;
+    private:
+        Ui::retrait *ui;
 };
 
 #endif // RETRAIT_H

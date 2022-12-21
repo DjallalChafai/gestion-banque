@@ -1,6 +1,6 @@
-# Modélisation simplifiée banque
+# Modélisation simplifiée de la gestion de comptes bancaires
 
-Projet de fin de semestre C++
+L’objet de ce projet C++ est de modéliser la gestion de comptes bancaires en ligne.
 
 
 ## Installation
@@ -15,4 +15,4 @@ Une version pré-compilée est disponible dans l'onglet releases du repo.
 
 ---
 
-Groupe 47 - Djallal Mehdi Chafai, Noé Barlet, Théo Vanglewuve, Théo Danel
+Groupe 16 - Djallal Mehdi Chafai, Noé Barlet, Théo Vanglewuve, Théo Danel

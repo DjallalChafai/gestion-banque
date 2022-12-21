@@ -9,24 +9,22 @@
 #include <QTcpSocket>
 
 namespace Ui {
-class Fermer_Compte;
+    class Fermer_Compte;
 }
 
-class Fermer_Compte : public QDialog
-{
+class Fermer_Compte : public QDialog {
     Q_OBJECT
 
-public:
-    explicit Fermer_Compte(QWidget *parent = nullptr);
-    ~Fermer_Compte();
+    public:
+        explicit Fermer_Compte(QWidget *parent = nullptr);
+        ~Fermer_Compte();
 
-private slots:
-    void on_Annuler_clicked();
+    private slots:
+        void on_Annuler_clicked();
+        void on_Ok_clicked();
 
-    void on_Ok_clicked();
-
-private:
-    Ui::Fermer_Compte *ui;
+    private:
+        Ui::Fermer_Compte *ui;
 };
 
 #endif // FERMER_COMPTE_H
