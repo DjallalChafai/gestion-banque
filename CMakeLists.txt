@@ -30,11 +30,12 @@ set(PROJECT_SOURCES
         numero_compte.cpp
         retrait.cpp
         depot.cpp
+        #mythread.cpp
         ${TS_FILES}
 )
 
 # header files
-set(GLOB PROJECT_HEADERS "*.hpp")
+set(GLOB PROJECT_HEADERS "*.h")
 
 # Qt UI files
 set(GLOB PROJECT_FORMS "*.ui")

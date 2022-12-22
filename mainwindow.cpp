@@ -1,10 +1,9 @@
-#include "mainwindow.hpp"
-#include "dialog.hpp"
-#include "fermer_compte.hpp"
-#include "solde_compte.hpp"
-#include "numero_compte.hpp"
-#include "depot.hpp"
-#include "retrait.hpp"
+#include "mainwindow.h"
+#include "dialog.h"
+#include "fermer_compte.h"
+#include "solde_compte.h"
+#include "numero_compte.h"
+#include "depot.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -61,11 +60,11 @@ void MainWindow::on_Boursorama_clicked() {
 
     ui->SqlView->setModel(model);
 
-    if(!qry->exec())
-      qDebug() << qry->lastError();
+    if(!qry->exec())    //affichage message d'erreur ou de succès
+      QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
 
     else
-      qDebug("Selected!");
+      QMessageBox::information(this, tr("Success"), tr("DB has been selected"));
 }
 
 
@@ -100,10 +99,11 @@ void MainWindow::on_Revolut_clicked() {
 
     ui->SqlView->setModel(model);
 
-    if( !qry->exec() )
-      qDebug() << qry->lastError();
+    if( !qry->exec() )  //affichage message d'erreur ou de succès
+        QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
+
     else
-        qDebug("Selected!");
+        QMessageBox::information(this, tr("Success"), tr("DB has been selected"));
 }
 
 
@@ -130,11 +130,11 @@ void MainWindow::on_N26_clicked() {
 
     ui->SqlView->setModel(model);
 
-    if( !qry->exec() )
-      qDebug() << qry->lastError();
+    if( !qry->exec() )  //affichage message d'erreur ou de succès
+        QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
 
     else
-      qDebug("Selected!");
+        QMessageBox::information(this, tr("Success"), tr("DB has been selected"));
 
 }
 

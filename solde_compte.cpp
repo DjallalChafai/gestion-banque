@@ -1,4 +1,4 @@
-#include "solde_compte.hpp"
+#include "solde_compte.h"
 #include "ui_solde_compte.h"
 
 Solde_Compte::Solde_Compte(QWidget *parent) : QDialog(parent), ui(new Ui::Solde_Compte) {
@@ -65,9 +65,14 @@ void Solde_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(7,true);
 
-            // vérification de la requête SQL
-            if(qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully deleted into the DB";
+            // vérification de la requête SQL et affichage d'un message de succès
+            if (qry->first() == true) {
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully found into the DB"));
+            }
+
+            // affichage d'un message d'erreur
+            else {
+                QMessageBox::warning(this, tr("Problem"), tr("Data was not found into the DB"));
             }
         }
 
@@ -96,8 +101,14 @@ void Solde_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(7,true);
 
-            if(qry->lastError().type() == QSqlError::NoError){
-                qDebug() << "Data was successfully deleted into the DB";
+            // affichage d'un message de succès
+            if (qry->first() == true) {
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully found into the DB"));
+            }
+
+            // affichage d'un message d'erreur
+            else {
+                QMessageBox::warning(this, tr("Problem"), tr("Data was not found into the DB"));
             }
         }
 
@@ -126,10 +137,18 @@ void Solde_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(7,true);
 
-            if(qry->lastError().type() == QSqlError::NoError){
-                qDebug() << "Data was successfully deleted into the DB";
+            // affichage d'un message de succès
+            if (qry->first() == true) {
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully found into the DB"));
             }
+
+            // affichage d'un message d'erreur
+            else {
+                QMessageBox::warning(this, tr("Problem"), tr("Data was not found into the DB"));
+            }
+
         }
+
         // fermeture de la connexion socket
         socket.close();
     }

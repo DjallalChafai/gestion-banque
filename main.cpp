@@ -1,9 +1,13 @@
-#include "mainwindow.hpp"
+#include "mainwindow.h"
+//#include "mythread.h"
+#include <iostream>
+#include <thread>
 
 using namespace std;
 
 void connect(QString database) {
     // connexion à la base de données
+    qDebug()<<"Thread lancé";
     QSqlDatabase DB = QSqlDatabase::addDatabase("QMYSQL", database);
     DB.setHostName("127.0.0.1");
     DB.setUserName("root");
@@ -15,12 +19,12 @@ void connect(QString database) {
             qry->exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER)");
         } else {
             // si erreur de création de la table
-            qWarning() << "ERROR: " << qry->lastError().text();
+            QMessageBox::warning(0, QMessageBox::tr("Error !"), qry->lastError().text());
         }
         DB.close();
     } else {
         // si erreur de connexion
-        qDebug() << DB.lastError().text();
+        QMessageBox::critical(0, QMessageBox::tr("Failed to connect!"), DB.lastError().text());
         qFatal("Failed to connect!");
     }
 }
@@ -41,17 +45,17 @@ int main(int argc, char *argv[]) {
         thread revolut(connect, "rv");
         thread n26(connect, "n26");
 
-        // attente de la fin des threads (synchronisation)
+        // attente de la fin des threads (synchronisation);
         boursorama.join();
         revolut.join();
         n26.join();
 
         // fermeture de la connexion socket
         socket.close();
-
+    }
     // si absence de connexion à la base de données
-    } else {
-        qDebug() << "Could not connect to the MySQL server";
+    else {
+        QMessageBox::critical(0, QMessageBox::tr("Failed to connect!"), QMessageBox::tr("Could not connect to the MySQl server"));
     }
 
     // traductions et textes pour l'interface graphique

@@ -1,4 +1,4 @@
-#include "numero_compte.hpp"
+#include "numero_compte.h"
 #include "ui_numero_compte.h"
 
 Numero_Compte::Numero_Compte(QWidget *parent) : QDialog(parent), ui(new Ui::Numero_Compte) {
@@ -67,8 +67,13 @@ void Numero_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(8,true);
 
             // affichage d'un message de succès
-            if (qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully found into the DB";
+            if (qry->first() == true) {
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully found into the DB"));
+            }
+
+            // affichage d'un message d'erreur
+            else {
+                QMessageBox::warning(this, tr("Problem"), tr("Data was not found into the DB"));
             }
         }
 
@@ -95,8 +100,14 @@ void Numero_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(8,true);
 
-            if(qry->lastError().type() == QSqlError::NoError){
-                qDebug() << "Data was successfully found into the DB";
+            // affichage d'un message de succès
+            if (qry->first() == true) {
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully found into the DB"));
+            }
+
+            // affichage d'un message d'erreur
+            else {
+                QMessageBox::warning(this, tr("Problem"), tr("Data was not found into the DB"));
             }
         }
 
@@ -117,21 +128,31 @@ void Numero_Compte::on_Ok_clicked() {
             ui->tableView->setModel(model);
 
             ui->tableView->setColumnHidden(0,true);
+            ui->tableView->setColumnHidden(1,true);
+            ui->tableView->setColumnHidden(2,true);
             ui->tableView->setColumnHidden(3,true);
             ui->tableView->setColumnHidden(4,true);
             ui->tableView->setColumnHidden(5,true);
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(8,true);
 
-            if(qry->lastError().type() == QSqlError::NoError){
-                qDebug() << "Data was successfully found into the DB";
+            // affichage d'un message de succès
+            if (qry->first() == true) {
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully found into the DB"));
+            }
+
+            // affichage d'un message d'erreur
+            else {
+                QMessageBox::warning(this, tr("Problem"), tr("Data was not found into the DB"));
             }
         }
 
         // fermeture de la connexion socket
         socket.close();
-    } else {
+    }
+
+    else {
         // affichage d'un message d'erreur
-        qDebug() << "Could not connect to the MySQL server";
+        QMessageBox::critical(this, tr("Problem"), tr("Could not connect to the MySQL server"));
     }
 }

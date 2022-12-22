@@ -1,4 +1,4 @@
-#include "depot.hpp"
+#include "depot.h"
 #include "ui_depot.h"
 
 depot::depot(QWidget *parent) : QDialog(parent), ui(new Ui::depot) {
@@ -48,7 +48,7 @@ void depot::on_button_accepted() {
 
             // affichage du message réponse (si succès ou erreur)
             if (qry->first() == true) {
-                QMessageBox::warning(this, tr("Thank you"), tr("Deposit was successfully done!"));
+                QMessageBox::information(this, tr("Thank you"), tr("Deposit was successfully done!"));
             } else {
                 QMessageBox::warning(this, tr("We are sorry"), tr("Account could not be found!"));
             }

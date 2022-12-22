@@ -1,4 +1,4 @@
-#include "fermer_compte.hpp"
+#include "fermer_compte.h"
 #include "ui_fermer_compte.h"
 
 Fermer_Compte::Fermer_Compte(QWidget *parent) : QDialog(parent), ui(new Ui::Fermer_Compte) {
@@ -48,7 +48,11 @@ void Fermer_Compte::on_Ok_clicked() {
 
             // affichage du résultat de la requête
             if(qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully deleted into the DB";
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully deleted into the DB"));
+            }
+
+            else{
+                QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -62,7 +66,11 @@ void Fermer_Compte::on_Ok_clicked() {
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully deleted into the DB";
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully deleted into the DB"));
+            }
+
+            else{
+                QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -76,7 +84,11 @@ void Fermer_Compte::on_Ok_clicked() {
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully deleted into the DB";
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully deleted into the DB"));
+            }
+
+            else{
+                QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -84,7 +96,7 @@ void Fermer_Compte::on_Ok_clicked() {
         socket.close();
     } else {
         // affichage d'un message d'erreur
-        qDebug() << "Could not connect to the MySQL server";
+        QMessageBox::critical(this, tr("Problem"), tr("Could not connect to the MySQL server"));
     }
 
     // fermeture de la fenêtre

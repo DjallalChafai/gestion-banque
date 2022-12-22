@@ -1,12 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <iostream>
-#include <thread>
-
 #include <QMainWindow>
 #include <QApplication>
+#include <QThread>
 #include <QLocale>
+#include <QMessageBox>
+#include <QInputDialog>
 #include <QTranslator>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>

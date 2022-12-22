@@ -1,4 +1,4 @@
-#include "dialog.hpp"
+#include "dialog.h"
 #include "ui_dialog.h"
 
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
@@ -60,11 +60,11 @@ void Dialog::on_Ok_clicked() {
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully inserted into the DB";
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully inserted into the DB"));
             }
 
             if(!qry->isActive()) {
-                qWarning() << "ERROR: " << qry->lastError().text();
+                QMessageBox::critical(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -89,12 +89,12 @@ void Dialog::on_Ok_clicked() {
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError){
-                qDebug() << "Data was successfully inserted into the DB";
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully inserted into the DB"));
             }
 
             if(!qry->isActive())
             {
-                qWarning() << "ERROR: " << qry->lastError().text();
+                QMessageBox::critical(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -119,12 +119,12 @@ void Dialog::on_Ok_clicked() {
             qry->exec();
 
             if(qry->lastError().type() == QSqlError::NoError) {
-                qDebug() << "Data was successfully inserted into the DB";
+                QMessageBox::information(this, tr("Success"), tr("Data was successfully inserted into the DB"));
             }
 
             if(!qry->isActive())
             {
-                qWarning() << "ERROR: " << qry->lastError().text();
+                QMessageBox::critical(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -132,7 +132,7 @@ void Dialog::on_Ok_clicked() {
         socket.close();
     } else {
         // affichage d'un message d'erreur
-        qDebug() << "Could not connect to the MySQL server";
+        QMessageBox::critical(this, tr("Problem"), tr("Could not connect to the MySQL server"));
     }
 
     // fermeture de la fenêtre

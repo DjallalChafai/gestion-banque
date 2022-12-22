@@ -1,30 +1,31 @@
-#ifndef NUMERO_COMPTE_H
-#define NUMERO_COMPTE_H
+#ifndef SOLDE_COMPTE_H
+#define SOLDE_COMPTE_H
 
 #include <QDialog>
 #include <QtDebug>
+#include <QMessageBox>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
 #include <QTcpSocket>
 
 namespace Ui {
-    class Numero_Compte;
+    class Solde_Compte;
 }
 
-class Numero_Compte : public QDialog {
+class Solde_Compte : public QDialog {
     Q_OBJECT
 
     public:
-        explicit Numero_Compte(QWidget *parent = nullptr);
-        ~Numero_Compte();
+        explicit Solde_Compte(QWidget *parent = nullptr);
+        ~Solde_Compte();
 
     private slots:
         void on_Annuler_clicked();
         void on_Ok_clicked();
 
     private:
-        Ui::Numero_Compte *ui;
-    };
+        Ui::Solde_Compte *ui;
+};
 
-#endif // NUMERO_COMPTE_H
+#endif // SOLDE_COMPTE_H
