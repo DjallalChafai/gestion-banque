@@ -8,6 +8,9 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QTranslator>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QTranslator>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
