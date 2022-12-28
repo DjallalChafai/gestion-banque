@@ -39,7 +39,9 @@ class MainWindow : public QMainWindow {
         void on_actionNum_ro_de_compte_triggered();
         void on_actionD_pot_sur_un_Compte_triggered();
 
-    private:
+        void on_actionRetrait_d_un_Compte_triggered();
+
+private:
         Ui::MainWindow *ui;
 };
 

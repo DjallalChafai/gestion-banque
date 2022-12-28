@@ -2,6 +2,9 @@
 #define RETRAIT_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include <QTcpSocket>
+#include <QtSql>
 
 namespace Ui {
     class retrait;
@@ -14,7 +17,12 @@ class retrait : public QDialog {
         explicit retrait(QWidget *parent = nullptr);
         ~retrait();
 
-    private:
+private slots:
+    void on_button_accepted();
+
+    void on_button_rejected();
+
+private:
         Ui::retrait *ui;
 };
 

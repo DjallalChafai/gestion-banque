@@ -1,17 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>retrait</class>
- <widget name="retrait" class="QDialog">
+ <widget class="QDialog" name="retrait">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>416</width>
+    <height>327</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Retrait</string>
   </property>
+  <widget class="QDialogButtonBox" name="button">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>250</y>
+     <width>166</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="account1">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>90</y>
+     <width>113</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>account_n°1</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="montant">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>90</y>
+     <width>113</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>montant</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="Banque1">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>150</y>
+     <width>91</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Boursorama</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Revolut</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>N26</string>
+    </property>
+   </item>
+  </widget>
  </widget>
  <resources/>
  <connections/>

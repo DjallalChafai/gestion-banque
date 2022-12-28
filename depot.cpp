@@ -39,18 +39,89 @@ void depot::on_button_accepted() {
             // sélection de la base de données
             QSqlDatabase BB = QSqlDatabase::database("bb");
             QSqlQuery *qry = new QSqlQuery(BB);
+            QSqlQuery *qry2 = new QSqlQuery(BB);
 
             // requête SQL à la base de données
-            qry->prepare("SELECT balance FROM info WHERE account_number = ?");
-            qry->addBindValue(account_number1);
-            qry->exec();
-            qDebug()<< qry->first();
+            qry2->prepare("SELECT balance FROM info WHERE account_number = ?");
+            qry2->addBindValue(account_number1);
+            qry2->exec();
+            qDebug()<< qry2->first();
 
             // affichage du message réponse (si succès ou erreur)
-            if (qry->first() == true) {
+            if (qry2->first() == true && amount.toInt() > 0) {
                 QMessageBox::information(this, tr("Thank you"), tr("Deposit was successfully done!"));
-            } else {
+                qry->prepare("UPDATE info SET balance = balance + ? WHERE account_number = ?");
+                qry->addBindValue(amount);
+                qry->addBindValue(account_number1);
+                qry->exec();
+            }
+
+            else if (qry2->first() == false) {
                 QMessageBox::warning(this, tr("We are sorry"), tr("Account could not be found!"));
+            }
+
+            else if (amount.toInt() < 0){
+                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative"));
+            }
+        }
+
+        if(ui->Banque1->currentText() == "N26") {
+            // sélection de la base de données
+            QSqlDatabase N26 = QSqlDatabase::database("n26");
+            QSqlQuery *qry = new QSqlQuery(N26);
+            QSqlQuery *qry2 = new QSqlQuery(N26);
+
+            // requête SQL à la base de données
+            qry2->prepare("SELECT balance FROM info WHERE account_number = ?");
+            qry2->addBindValue(account_number1);
+            qry2->exec();
+            qDebug()<< qry2->first();
+
+            // affichage du message réponse (si succès ou erreur)
+            if (qry2->first() == true && amount.toInt() > 0) {
+                QMessageBox::information(this, tr("Thank you"), tr("Deposit was successfully done!"));
+                qry->prepare("UPDATE info SET balance = balance + ? WHERE account_number = ?");
+                qry->addBindValue(amount);
+                qry->addBindValue(account_number1);
+                qry->exec();
+            }
+
+            else if (qry2->first() == false) {
+                QMessageBox::warning(this, tr("We are sorry"), tr("Account could not be found!"));
+            }
+
+            else if (amount.toInt() < 0){
+                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative"));
+            }
+        }
+
+        if(ui->Banque1->currentText() == "Revolut") {
+            // sélection de la base de données
+            QSqlDatabase RV = QSqlDatabase::database("rv");
+            QSqlQuery *qry = new QSqlQuery(RV);
+            QSqlQuery *qry2 = new QSqlQuery(RV);
+
+            // requête SQL à la base de données
+            qry2->prepare("SELECT balance FROM info WHERE account_number = ?");
+            qry2->addBindValue(account_number1);
+            qry2->exec();
+            qDebug()<< qry2->first();
+
+            // affichage du message réponse (si succès ou erreur)
+            if (qry2->first() == true && amount.toInt() > 0) {
+                QMessageBox::information(this, tr("Thank you"), tr("Deposit was successfully done!"));
+                qry->prepare("UPDATE info SET balance = balance + ? WHERE account_number = ?");
+                qry->addBindValue(amount);
+                qry->addBindValue(account_number1);
+                qry->exec();
+            }
+
+            else if (qry2->first() == false) {
+                QMessageBox::warning(this, tr("We are sorry"), tr("Account could not be found!"));
+            }
+
+            else if (amount.toInt() < 0){
+                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative"));
             }
         }
 

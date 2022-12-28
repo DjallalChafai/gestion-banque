@@ -4,6 +4,7 @@
 #include "solde_compte.h"
 #include "numero_compte.h"
 #include "depot.h"
+#include "retrait.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -161,3 +162,11 @@ void MainWindow::on_actionD_pot_sur_un_Compte_triggered() {
     d.setModal(true);
     d.exec();
 }
+
+void MainWindow::on_actionRetrait_d_un_Compte_triggered() {
+    // ouverture et affichage de la fenêtre
+    retrait r;
+    r.setModal(true);
+    r.exec();
+}
+
