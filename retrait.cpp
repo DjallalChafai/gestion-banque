@@ -44,7 +44,7 @@ void retrait::on_button_accepted()
             qDebug()<< qry2->first();
 
             // affichage du message réponse (si succès ou erreur)
-            if (qry2->first() == true && amount.toInt() > 0) {
+            if (qry2->first() == true && amount.toInt() >= 0) {
                 QMessageBox::information(this, tr("Thank you"), tr("Withdrawal was successfully done!"));
                 qry->prepare("UPDATE info SET balance = balance - ? WHERE account_number = ?");
                 qry->addBindValue(amount);
@@ -57,7 +57,7 @@ void retrait::on_button_accepted()
             }
 
             else if (amount.toInt() < 0){
-                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative"));
+                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative or null"));
             }
         }
 
@@ -74,7 +74,7 @@ void retrait::on_button_accepted()
             qDebug()<< qry2->first();
 
             // affichage du message réponse (si succès ou erreur)
-            if (qry2->first() == true && amount.toInt() > 0) {
+            if (qry2->first() == true && amount.toInt() >= 0) {
                 QMessageBox::information(this, tr("Thank you"), tr("Withdrawal was successfully done!"));
                 qry->prepare("UPDATE info SET balance = balance - ? WHERE account_number = ?");
                 qry->addBindValue(amount);
@@ -87,7 +87,7 @@ void retrait::on_button_accepted()
             }
 
             else if (amount.toInt() < 0){
-                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative"));
+                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative or null"));
             }
         }
 
@@ -104,7 +104,7 @@ void retrait::on_button_accepted()
             qDebug()<< qry2->first();
 
             // affichage du message réponse (si succès ou erreur)
-            if (qry2->first() == true && amount.toInt() > 0) {
+            if (qry2->first() == true && amount.toInt() >= 0) {
                 QMessageBox::information(this, tr("Thank you"), tr("Withdrawal was successfully done!"));
                 qry->prepare("UPDATE info SET balance = balance - ? WHERE account_number = ?");
                 qry->addBindValue(amount);
@@ -117,7 +117,7 @@ void retrait::on_button_accepted()
             }
 
             else if (amount.toInt() < 0){
-                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative"));
+                QMessageBox::warning(this, tr("We are sorry"), tr("The amount could not be negative or null"));
             }
         }
 

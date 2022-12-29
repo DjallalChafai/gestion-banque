@@ -22,7 +22,7 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>account_number</string>
    </property>
   </widget>
@@ -35,7 +35,7 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>password</string>
    </property>
   </widget>

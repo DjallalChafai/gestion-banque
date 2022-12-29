@@ -22,8 +22,8 @@
      <height>22</height>
     </rect>
    </property>
-   <property name="text">
-    <string>firstname</string>
+   <property name="placeholderText">
+    <string>firstName</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lastName">
@@ -35,8 +35,8 @@
      <height>22</height>
     </rect>
    </property>
-   <property name="text">
-    <string>lastname</string>
+   <property name="placeholderText">
+    <string>lastName</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Ok">
@@ -99,7 +99,7 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>address</string>
    </property>
   </widget>
@@ -112,7 +112,7 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>email</string>
    </property>
   </widget>
@@ -125,7 +125,7 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>phone</string>
    </property>
   </widget>
@@ -138,8 +138,21 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>password</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="epargne">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>77</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>épargne</string>
    </property>
   </widget>
  </widget>

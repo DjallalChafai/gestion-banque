@@ -30,7 +30,8 @@ set(PROJECT_SOURCES
         numero_compte.cpp
         retrait.cpp
         depot.cpp
-        #mythread.cpp
+        epargne.cpp
+        virement.cpp
         ${TS_FILES}
 )
 

@@ -7,7 +7,7 @@ class SqlThread : public QThread {
     protected:
         void run() override {
             QSqlQuery query(m_db);
-            query.exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER)");
+            query.exec("CREATE TABLE IF NOT EXISTS info (id INTEGER UNIQUE PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(30), lastname VARCHAR(30), address VARCHAR(30), email VARCHAR(30), phone INTEGER, password VARCHAR(30), account_number INTEGER, balance INTEGER, epargne BOOLEAN NOT NULL DEFAULT 0)");
         }
     private:
         QSqlDatabase m_db;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         db1.setUserName("root");
         db1.setDatabaseName("bb");
         if (!db1.open()) {
-            // to-do: handle error
+            QMessageBox::warning(0, QMessageBox::tr("Problem"), db1.lastError().text());
         } else {
             // création de la table "info" dans la base de données n°1 dans un thread séparé
             SqlThread *thread1 = new SqlThread(db1);
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
         db2.setUserName("root");
         db2.setDatabaseName("rv");
         if (!db2.open()) {
-            // to-do: handle error
+            QMessageBox::warning(0, QMessageBox::tr("Problem"), db2.lastError().text());
         } else {
             // création de la table "info" dans la base de données n°2 dans un thread séparé
             SqlThread *thread2 = new SqlThread(db2);
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
         db3.setUserName("root");
         db3.setDatabaseName("n26");
         if (!db3.open()) {
-            // to-do: handle error
+            QMessageBox::warning(0, QMessageBox::tr("Problem"), db3.lastError().text());
         } else {
             // création de la table "info" dans la base de données n°2 dans un thread séparé
             SqlThread *thread3 = new SqlThread(db3);

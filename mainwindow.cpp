@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include "dialog.h"
+#include "virement.h"
 #include "fermer_compte.h"
 #include "solde_compte.h"
 #include "numero_compte.h"
 #include "depot.h"
 #include "retrait.h"
+#include "epargne.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -58,6 +60,7 @@ void MainWindow::on_Boursorama_clicked() {
     model->setHeaderData(6, Qt::Horizontal, tr("password"));
     model->setHeaderData(7, Qt::Horizontal, tr("account_number"));
     model->setHeaderData(8, Qt::Horizontal, tr("balance"));
+    model->setHeaderData(9, Qt::Horizontal, tr("épargne"));
 
     ui->SqlView->setModel(model);
 
@@ -97,6 +100,7 @@ void MainWindow::on_Revolut_clicked() {
     model->setHeaderData(6, Qt::Horizontal, tr("password"));
     model->setHeaderData(7, Qt::Horizontal, tr("account_number"));
     model->setHeaderData(8, Qt::Horizontal, tr("balance"));
+    model->setHeaderData(9, Qt::Horizontal, tr("épargne"));
 
     ui->SqlView->setModel(model);
 
@@ -128,6 +132,7 @@ void MainWindow::on_N26_clicked() {
     model->setHeaderData(6, Qt::Horizontal, tr("password"));
     model->setHeaderData(7, Qt::Horizontal, tr("account_number"));
     model->setHeaderData(8, Qt::Horizontal, tr("balance"));
+    model->setHeaderData(9, Qt::Horizontal, tr("épargne"));
 
     ui->SqlView->setModel(model);
 
@@ -168,5 +173,21 @@ void MainWindow::on_actionRetrait_d_un_Compte_triggered() {
     retrait r;
     r.setModal(true);
     r.exec();
+}
+
+
+void MainWindow::on_actionVirement_triggered() {
+    //ouverture et affichage de la fenêtre
+    virement v;
+    v.setModal(true);
+    v.exec();
+}
+
+
+void MainWindow::on_action_pargne_triggered() {
+    //ouverture et affichage de la fenêtre
+    epargne e;
+    e.setModal(true);
+    e.exec();
 }
 

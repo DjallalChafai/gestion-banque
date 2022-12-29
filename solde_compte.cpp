@@ -64,6 +64,7 @@ void Solde_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(5,true);
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(7,true);
+            ui->tableView->setColumnHidden(9,true);
 
             // vérification de la requête SQL et affichage d'un message de succès
             if (qry->first() == true) {
@@ -100,6 +101,7 @@ void Solde_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(5,true);
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(7,true);
+            ui->tableView->setColumnHidden(9,true);
 
             // affichage d'un message de succès
             if (qry->first() == true) {
@@ -136,6 +138,7 @@ void Solde_Compte::on_Ok_clicked() {
             ui->tableView->setColumnHidden(5,true);
             ui->tableView->setColumnHidden(6,true);
             ui->tableView->setColumnHidden(7,true);
+            ui->tableView->setColumnHidden(9,true);
 
             // affichage d'un message de succès
             if (qry->first() == true) {

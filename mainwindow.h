@@ -41,6 +41,10 @@ class MainWindow : public QMainWindow {
 
         void on_actionRetrait_d_un_Compte_triggered();
 
+        void on_actionVirement_triggered();
+
+        void on_action_pargne_triggered();
+
 private:
         Ui::MainWindow *ui;
 };

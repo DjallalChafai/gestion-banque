@@ -73,7 +73,16 @@
      <height>24</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;email&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;email&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
     <string>email</string>
    </property>
   </widget>
@@ -86,7 +95,7 @@
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="placeholderText">
     <string>password</string>
    </property>
   </widget>

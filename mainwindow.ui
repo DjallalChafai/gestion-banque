@@ -98,6 +98,8 @@
     <addaction name="actionRetrait_d_un_Compte"/>
     <addaction name="actionHistorique_d_un_Compte"/>
     <addaction name="actionNum_ro_de_compte"/>
+    <addaction name="actionVirement"/>
+    <addaction name="action_pargne"/>
    </widget>
    <addaction name="menuOp_ration"/>
   </widget>
@@ -105,9 +107,15 @@
    <property name="text">
     <string>Ouvrir un Compte</string>
    </property>
+   <property name="toolTip">
+    <string>Ouvrir un Compte</string>
+   </property>
   </action>
   <action name="actionFermer_un_compte">
    <property name="text">
+    <string>Fermer un Compte</string>
+   </property>
+   <property name="toolTip">
     <string>Fermer un Compte</string>
    </property>
   </action>
@@ -128,12 +136,22 @@
   </action>
   <action name="actionHistorique_d_un_Compte">
    <property name="text">
-    <string>Historique d'un Compte</string>
+    <string>Historique d'un Compte (non fonctionnel)</string>
    </property>
   </action>
   <action name="actionNum_ro_de_compte">
    <property name="text">
     <string>Numéro de compte</string>
+   </property>
+  </action>
+  <action name="actionVirement">
+   <property name="text">
+    <string>Virement</string>
+   </property>
+  </action>
+  <action name="action_pargne">
+   <property name="text">
+    <string>épargne</string>
    </property>
   </action>
  </widget>

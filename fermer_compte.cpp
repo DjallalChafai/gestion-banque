@@ -50,27 +50,21 @@ void Fermer_Compte::on_Ok_clicked() {
             if(qry->lastError().type() == QSqlError::NoError) {
                 QMessageBox::information(this, tr("Success"), tr("Data was successfully deleted into the DB"));
             }
-
-            else{
-                QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
-            }
         }
 
         if (ui->Banque->currentText() == "Revolut") {
             QSqlDatabase RV = QSqlDatabase::database("rv");
             QSqlQuery *qry = new QSqlQuery(RV);
 
+            // requête SQL
             qry->prepare( "DELETE FROM info WHERE email = ? AND password = ?" );
             qry->addBindValue(email);
             qry->addBindValue(password);
             qry->exec();
 
+            // affichage du résultat de la requête
             if(qry->lastError().type() == QSqlError::NoError) {
                 QMessageBox::information(this, tr("Success"), tr("Data was successfully deleted into the DB"));
-            }
-
-            else{
-                QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
             }
         }
 
@@ -78,27 +72,24 @@ void Fermer_Compte::on_Ok_clicked() {
             QSqlDatabase N26 = QSqlDatabase::database("n26");
             QSqlQuery *qry = new QSqlQuery(N26);
 
+            // requête SQL
             qry->prepare( "DELETE FROM info WHERE email = ? AND password = ?" );
             qry->addBindValue(email);
             qry->addBindValue(password);
             qry->exec();
 
+            // affichage du résultat de la requête
             if(qry->lastError().type() == QSqlError::NoError) {
                 QMessageBox::information(this, tr("Success"), tr("Data was successfully deleted into the DB"));
-            }
-
-            else{
-                QMessageBox::warning(this, tr("Problem"), qry->lastError().text());
             }
         }
 
         // fermeture de la connexion socket
         socket.close();
-    } else {
+    }
+
+    else {
         // affichage d'un message d'erreur
         QMessageBox::critical(this, tr("Problem"), tr("Could not connect to the MySQL server"));
     }
-
-    // fermeture de la fenêtre
-    close();
 }
